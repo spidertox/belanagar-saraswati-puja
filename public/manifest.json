@@ -1,0 +1,21 @@
+{
+  "name": "Belanagar Saraswati Puja Samiti",
+  "short_name": "Belanagar Puja",
+  "description": "बेलानगर सरस्वती पूजा समिति — पूजा कार्यक्रम, दान और खर्च की पारदर्शी जानकारी",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF6EA",
+  "theme_color": "#7A1B34",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
