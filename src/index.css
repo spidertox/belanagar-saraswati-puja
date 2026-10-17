@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ivory-100 text-navy-900 font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-maroon-700;
+  }
+  ::selection {
+    @apply bg-gold-300 text-maroon-900;
+  }
+  /* Visible keyboard focus everywhere, including on custom components */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #C08A1E;
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Form fields use focus:outline-none for the border style; keep a visible ring for keyboard users */
+input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid #C08A1E !important; outline-offset: 1px; }
+/* Comfortable touch targets on phones */
+@media (pointer: coarse) { .btn-primary, .btn-outline { min-height: 44px; } }
+
+@layer components {
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-gold-300/70 bg-gradient-to-b from-maroon-500 to-maroon-700 px-7 py-3 text-sm font-semibold tracking-wide text-ivory-50 transition duration-200 hover:-translate-y-0.5 hover:scale-[1.04] active:translate-y-0 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:scale-100;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 6px 18px -4px rgba(92,20,39,.55), 0 0 0 0 rgba(220,174,73,.55);
+    animation: btn-glow 2.8s ease-in-out infinite;
+  }
+  .btn-primary:hover:not(:disabled) { box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 12px 28px -6px rgba(92,20,39,.7), 0 0 0 4px rgba(220,174,73,.35); animation: none; }
+  .btn-primary:disabled { animation: none; }
+  .btn-primary::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; transform: translateX(-130%);
+    background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.38) 50%, transparent 70%);
+  }
+  .btn-primary:hover:not(:disabled)::after { transform: translateX(130%); transition: transform .7s ease; }
+  .btn-outline {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full border-2 border-maroon-700 bg-ivory-50/60 px-7 py-3 text-sm font-semibold tracking-wide text-maroon-700 transition duration-200 hover:-translate-y-0.5 hover:scale-[1.04] hover:bg-maroon-700 hover:text-ivory-50 active:translate-y-0 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-outline:hover:not(:disabled) { box-shadow: 0 10px 24px -8px rgba(92,20,39,.55), 0 0 0 4px rgba(220,174,73,.3); }
+  .card-lift {
+    @apply transition duration-200 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lift;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Headings, brand name, short labels — the ornamental traditional face. */
+  .devanagari {
+    font-family: 'Tiro Devanagari Hindi', serif;
+  }
+  /* Paragraphs and dense UI text — a plainer, more readable Devanagari face. */
+  .devanagari-body {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+
+  /* Repeating lotus + veena wallpaper for the public pages. The tile is the
+     plain SVG in public/patterns/ — edit its opacity there to make the
+     pattern stronger or fainter. */
+  .puja-wallpaper {
+    background-image: url('/patterns/lotus-veena.svg');
+    background-size: 300px 300px;
+    background-repeat: repeat;
+  }
+  @media (max-width: 640px) {
+    .puja-wallpaper {
+      background-size: 240px 240px;
+    }
+  }
+
+  /* Gentle motion for the hero picture (see Backdrop.jsx). */
+  .art-sway {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: art-sway 9s ease-in-out infinite;
+  }
+  .art-twinkle {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: art-twinkle 4.5s ease-in-out infinite;
+  }
+}
+
+@keyframes art-sway {
+  0%, 100% { transform: rotate(-0.9deg); }
+  50% { transform: rotate(0.9deg); }
+}
+@keyframes art-twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes btn-glow { 0%,100% { box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 6px 18px -4px rgba(92,20,39,.55), 0 0 0 0 rgba(220,174,73,.5); } 50% { box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 6px 18px -4px rgba(92,20,39,.55), 0 0 0 8px rgba(220,174,73,0); } }
+@media (prefers-reduced-motion: reduce) { .btn-primary { animation: none; } .btn-primary::after { display: none; } }
+
+/* Shine sweep across primary buttons (login / sign-up) */
+.btn-shine { position: relative; overflow: hidden; }
+.btn-shine::after {
+  content: ''; position: absolute; inset: 0; transform: translateX(-120%);
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+}
+.btn-shine:hover:not(:disabled)::after { transform: translateX(120%); transition: transform 0.7s ease; }
+@media (prefers-reduced-motion: reduce) { .btn-shine::after { display: none; } }
+
+/* Cosmic mandala (login / sign-up) */
+.cm-sk { font-family: 'Rozha One', 'Tiro Devanagari Hindi', serif; }
+.cm-bg { background: radial-gradient(circle at 50% 50%, rgba(98,24,145,.4) 0%, rgba(28,12,75,.28) 38%, rgba(3,1,10,.95) 82%), radial-gradient(circle at 15% 15%, rgba(217,70,239,.14), transparent 50%), radial-gradient(circle at 85% 85%, rgba(6,182,212,.14), transparent 50%); }
+.cm-emblem { pointer-events: auto; cursor: pointer; }
+.cm-aura { position: absolute; left: 50%; top: 50%; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; translate: -50% -50%; }
+.cm-aura-1 { width: 92%; height: 92%; background: radial-gradient(circle, rgba(251,191,36,.25) 0%, rgba(217,70,239,.18) 45%, rgba(6,182,212,.15) 65%, transparent 75%); animation: cm-pulse 5s ease-in-out infinite alternate; }
+.cm-aura-2 { width: 60%; height: 60%; background: radial-gradient(circle, rgba(255,255,255,.3) 0%, rgba(251,191,36,.28) 40%, transparent 70%); animation: cm-pulse 3.5s ease-in-out infinite alternate-reverse; }
+.cm-intro { animation: cm-in 1.9s cubic-bezier(.22,1,.36,1) both; }
+@keyframes cm-pulse { from { transform: scale(.95); opacity: .75; } to { transform: scale(1.06); opacity: 1; } }
+@keyframes cm-in { from { opacity: 0; transform: scale(.8) rotate(-28deg); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .cm-aura, .cm-intro { animation: none; } }
+
+
+/* Form error state: red border + a short shake (replays when the field is re-keyed) */
+.field-error { border-color: #DC2626 !important; animation: field-shake 0.4s; }
+@keyframes field-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* Dark mode: the <html class="dark"> switch (ThemeToggle + script in index.html).
+   Recolors the few palette classes the pages use instead of touching every component. */
+.dark { color-scheme: dark; }
+.dark body { background-color: #14101A; color: #EDE6D6; }
+.dark h1, .dark h2, .dark h3, .dark h4,
+.dark .text-maroon-700, .dark .text-maroon-600 { color: #F2B8C6; }
+.dark .text-maroon-500 { color: #EE9DB0; }
+.dark .text-navy-900, .dark .text-navy-800, .dark .text-navy-700 { color: #EDE6D6; }
+.dark .text-navy-600 { color: #CFC7B6; }
+.dark .text-navy-500 { color: #B0A99A; }
+.dark .text-navy-400, .dark .placeholder\:text-navy-400::placeholder { color: #948E82; }
+.dark .footer-wave { color: #0F172A; }
+.dark .bg-white { background-color: #1E1825; }
+.dark .bg-white\/60 { background-color: rgb(30 24 37 / 0.6); }
+.dark .bg-white\/85 { background-color: rgb(30 24 37 / 0.85); }
+.dark .bg-ivory-50 { background-color: #1A1420; }
+.dark .bg-ivory-50\/90 { background-color: rgb(26 20 32 / 0.9); }
+.dark .bg-ivory-100 { background-color: #14101A; }
+.dark .bg-gold-50, .dark .bg-gold-50\/70 { background-color: #2A2218; }
+.dark .bg-gold-100, .dark .bg-gold-100\/70 { background-color: #3A2E1A; }
+.dark .border-white\/60 { border-color: rgb(255 255 255 / 0.12); }
+.dark .border-navy-900\/15, .dark .border-navy-900\/10, .dark .border-navy-900\/5, .dark .divide-navy-900\/5 > * + * { border-color: rgb(255 255 255 / 0.14); }
+.dark .bg-navy-900\/10 { background-color: rgb(255 255 255 / 0.1); }
+.dark .hover\:bg-navy-900\/5:hover { background-color: rgb(255 255 255 / 0.08); }
+.dark .from-white { --tw-gradient-from: #1E1825 var(--tw-gradient-from-position,); --tw-gradient-to: rgb(30 24 37 / 0) var(--tw-gradient-to-position,); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.dark .via-ivory-50 { --tw-gradient-stops: var(--tw-gradient-from), #1A1420 var(--tw-gradient-via-position,), var(--tw-gradient-to); }
+.dark .to-gold-50 { --tw-gradient-to: #2A2218 var(--tw-gradient-to-position,); }
+.dark .to-gold-100 { --tw-gradient-to: #3A2E1A var(--tw-gradient-to-position,); }
+.dark .from-gold-50, .dark .via-gold-50 { --tw-gradient-from: #2A2218 var(--tw-gradient-from-position,); }
+.dark .btn-outline:not(:hover) { color: #F2B8C6; border-color: #F2B8C6; }
+
+/* Print: just the page content, black on white */
+@media print {
+  header, footer, nav, canvas, iframe, .no-print, [role="dialog"] { display: none !important; }
+  html, body, .puja-wallpaper { background: #fff !important; background-image: none !important; }
+  body, main, main * { color: #000 !important; background: transparent !important; box-shadow: none !important; text-shadow: none !important; animation: none !important; }
+  main { padding: 0 !important; }
+  main a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #555 !important; word-break: break-all; }
+  h1, h2, h3 { break-after: avoid; }
+  img, table, tr, details, section, .card-lift { break-inside: avoid; }
+  details > *:not(summary) { display: block !important; }
+}

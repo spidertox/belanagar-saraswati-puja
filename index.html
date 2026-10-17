@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#7A1B34" />
+    <!-- Google Search Console (HTML tag method). Kept outside the seo markers so it stays on every page. -->
+    <meta name="google-site-verification" content="rddhdj_zNQwwbaANnUSg8N1YO5E2op-8vBhkpydDf5A" />
+    <!-- Dark mode: apply the saved / system choice before first paint (no white flash). -->
+    <script>
+      try {
+        var t = localStorage.getItem('bsp-theme');
+        if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    </script>
+
+    <!--
+      The block between the seo markers is replaced at build time, separately for
+      every page, by seoPlugin.js (title, description, canonical, Open Graph, JSON-LD).
+      Edit the wording in src/config/seo.js, not here.
+    -->
+    <!--seo:start-->
+    <title>बेलानगर सरस्वती पूजा समिति | Belanagar Saraswati Puja</title>
+    <meta name="description" content="बेलानगर सरस्वती पूजा समिति की पूजा, कार्यक्रम, दान, खर्च, समिति और आयोजन से जुड़ी जानकारी।" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="बेलानगर सरस्वती पूजा समिति | Belanagar Saraswati Puja" />
+    <meta property="og:description" content="बेलानगर सरस्वती पूजा समिति की पूजा, कार्यक्रम, दान, खर्च, समिति और आयोजन से जुड़ी जानकारी।" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!--seo:end-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Tiro+Devanagari+Hindi&family=Rozha+One&family=Work+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <noscript>इस वेबसाइट को देखने के लिए कृपया JavaScript चालू करें। Please enable JavaScript to view this site.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
